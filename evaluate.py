@@ -2,10 +2,11 @@ import click
 import time
 import json
 
+# import testing
+import testing_async as testing
+import summary
 from tasks import template
 from analysis.analysis import AnalysisAgent
-import testing
-import summary
 from enums import EnumEncoder
 
 from loguru import logger

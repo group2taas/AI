@@ -1,32 +1,32 @@
 import tempfile
-import asyncio
+import subprocess
 import os
 import json
 from enums import TestStatus
 from loguru import logger
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
-async def process_output(line, queue):
+def process_output(line, queue):
     cleaned_line = line.decode().strip()
     try:
         json_data = json.loads(cleaned_line)
-        await queue.put(json_data)
+        queue.append(json_data)
     except json.JSONDecodeError:
         logger.error(f"Invalid JSON output: {cleaned_line}")
 
 
-async def read_output(stream, queue):
+def read_output(stream, queue):
     while True:
-        line = await stream.readline()
+        line = stream.readline()
         if not line:
             break
-        await process_output(line, queue)
+        process_output(line, queue)
 
 
-async def run_tests_async(code):
+def run_tests_parallel(code, key):
     tmp_file_path = None
-    queue = asyncio.Queue()  # TODO: check if this is truly thread-safe
+    queue = []
 
     try:
         with tempfile.NamedTemporaryFile(
@@ -37,56 +37,27 @@ async def run_tests_async(code):
 
         logger.info(f"Temporary test file created at: {tmp_file_path}")
 
-        async def monitor_process_health(process, timeout=900):
-            try:
-                await asyncio.wait_for(process.wait(), timeout=timeout)
-                return process.returncode
-            except asyncio.TimeoutError:
-                process.terminate()
-                try:
-                    await asyncio.wait_for(process.wait(), timeout=5)
-                except asyncio.TimeoutError:
-                    process.kill()
-                return -1
+        process = subprocess.Popen(
+            ["python", "-u", tmp_file_path],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
 
-        async def run_subprocess():
-            sub_process = await asyncio.create_subprocess_exec(
-                "python",
-                "-u",
-                tmp_file_path,
-                stdout=asyncio.subprocess.PIPE,
-                stderr=asyncio.subprocess.PIPE,
-            )
+        read_output(process.stdout, queue)
+        read_output(process.stderr, queue)
 
-            tasks = [
-                asyncio.create_task(read_output(sub_process.stdout, queue)),
-                asyncio.create_task(read_output(sub_process.stderr, queue)),
-                asyncio.create_task(monitor_process_health(sub_process)),
-            ]
-
-            results = await asyncio.gather(*tasks, return_exceptions=True)
-
-            for result in results:
-                if isinstance(result, Exception):
-                    logger.error(f"Task exception: {result}")
-
-            return results[-1]
-
-        exit_code = await run_subprocess()
-        json_data_list = []
-        while not queue.empty():
-            json_data_list.append(await queue.get())
+        process.wait()
+        exit_code = process.returncode
 
         if exit_code == 0:
             logger.info(f"Script executed successfully")
-            return TestStatus.COMPLETED, json_data_list
+            return {key: (TestStatus.COMPLETED, queue)}
         else:
             logger.error(f"Script failed with exit code {exit_code}")
-            return TestStatus.FAILED, json_data_list
-
+            return {key: (TestStatus.FAILED, queue)}
     except Exception as e:
         logger.error(f"Failed to run tests: {e}")
-        return TestStatus.FAILED, []
+        return {key: (TestStatus.FAILED, [])}
 
     finally:
         try:
@@ -97,25 +68,14 @@ async def run_tests_async(code):
             logger.error(f"Failed to remove temporary file: {e}")
 
 
-def run_tests(code_key, code):
-    try:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        status, json_data_list = loop.run_until_complete(run_tests_async(code))
-        loop.close()
-        return {code_key: (status, json_data_list)}
-    except Exception as e:
-        logger.error(f"Failed to run tests: {e}")
-        return {code_key: (TestStatus.FAILED, [])}
-
-
 def run_multiple_tests(code_dict):
     test_results = dict()
 
     with ThreadPoolExecutor(max_workers=4) as executor:
 
         futures = [
-            executor.submit(run_tests, key, code) for key, code in code_dict.items()
+            executor.submit(run_tests_parallel, code, key)
+            for key, code in code_dict.items()
         ]
 
         for future in as_completed(futures):
