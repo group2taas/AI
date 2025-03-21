@@ -1,17 +1,19 @@
 # AI
 
-A simple CLI tool for refine AI and run penetration testing
+A simple CLI tool to evaluate AI-driven penetration testing
 
 ## Structure
 
 ```
 .
-├── analysis              <- code to generate scoping responses to test cases
+├── analysis              <- code to generate test cases from scoping responses
 │   ├── prompts.py        <- the place to improve on prompt engineering
 │   ...
 ├── base                  <- the part where most improvements should take place
 ├── source                <- modify this if you need new data source for RAG
+├── output                <- create an output folder to store evaluation results
 ├── tasks                 <- contain sites to run pentest on (WIP)
+├── summary.py            <- functions to generate evaluation results (WIP)
 ├── testing.py            <- script for pentration testing
 ├── evaluate.py           <- main script for the CLI
 ...

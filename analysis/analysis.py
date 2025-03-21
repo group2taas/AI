@@ -13,7 +13,9 @@ class AnalysisAgent:
         elif model_handler == "rag":
             self.model_handler = OWASPModelHandler()
         else:
-            raise ValueError(f"Invalid model handler: {model_handler}")
+            raise ValueError(
+                f"Invalid model handler: {model_handler}. Use either 'base' or 'rag'."
+            )
 
     def analyze_interview(self, interview_answers):
 
