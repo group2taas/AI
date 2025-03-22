@@ -1,5 +1,7 @@
 import random
 from typing import Dict
+import os
+
 
 # TODO: complete this questionaire
 scoping_questions = {
@@ -9,6 +11,11 @@ scoping_questions = {
     "Session Management": ["Cookies", "JWT"],
     "Session Timeout (mins)": [0, 24 * 60],
     "Total number of input fields": [0, 100],
+    "Number of endpoints": [0,100],
+    "Authentication Required": [True, False],
+    "Rate Limiting": [True, False],
+    "Documentation Available": [True, False],
+    "Hosting": ["Cloud", "On-premises", "Hybrid"]
 }
 
 
@@ -25,13 +32,16 @@ def generate_single_interview_answer(url: str, randomise: bool = False) -> str:
 
 
 def generate_template(task: str, randomise: bool = False) -> Dict[str, str]:
-    filepath = f"{task}.txt"
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    filepath = f"{base_dir}/{task}.txt"
     urls = {}
     with open(filepath, "r") as file:
         for line in file:
-            key, value = line.strip().split(maxsplit=1)
-            urls[key] = value
+            if line.strip(): 
+                key, value = line.strip().split(maxsplit=1)
+                urls[key] = value
+            else:
+                break
 
     return {
         key: generate_single_interview_answer(url, randomise)

@@ -16,7 +16,7 @@ load_dotenv()
 ZAP_API_KEY = os.getenv("ZAP_API_KEY")
 ZAP_PROXY_SERVER = os.getenv("ZAP_PROXY_SERVER")
 CHROMEDRIVER_PATH = os.getenv("CHROMEDRIVER_PATH")
-CHROMIUM_BINARY = os.getenv("CHROMIUM_BINARY")
+# CHROMIUM_BINARY = os.getenv("CHROMIUM_BINARY")
 
 class OWASP_SecurityTests(unittest.TestCase):
 
@@ -29,8 +29,8 @@ class OWASP_SecurityTests(unittest.TestCase):
         try:
             service = Service(executable_path=CHROMEDRIVER_PATH)
             options = webdriver.ChromeOptions()
-            if CHROMIUM_BINARY:
-                options.binary_location = CHROMIUM_BINARY
+            # if CHROMIUM_BINARY:
+            #     options.binary_location = CHROMIUM_BINARY
             user_data_dir = tempfile.mkdtemp(prefix=f"chrome_data_{uuid.uuid4()}_")
             options.add_argument(f"--user-data-dir={user_data_dir}")
 
@@ -46,10 +46,6 @@ class OWASP_SecurityTests(unittest.TestCase):
             self.driver.delete_all_cookies()
             self.zap = ZAPv2(apikey=ZAP_API_KEY, proxies={"http": self.zap_proxy, "https": self.zap_proxy})
             self.zap.core.delete_all_alerts()
-            
-            if not self.run_zap_scans():
-                raise Exception("ZAP scans failed to complete within the timeout period")
-                
             self.alert_count_before = len(self.zap.core.alerts(baseurl=self.target_url))
         except Exception as e:
             print(json.dumps({

@@ -1,5 +1,2 @@
-instagram, "www.instagram.com"
-facebook, "www.facebook.com"
-twitter, "www.twitter.com"
-linkedin, "www.linkedin.com"
-
+instagram, "https://instagram.com"
+linkedin, "https://linkedin.com"

@@ -32,6 +32,10 @@ def run_analysis(debug, model, task, randomise):
         f"Took {end_time - start_time} seconds to generate test scripts for: {list(code_dict.keys())}"
     )
 
+    # for key, code in code_dict.items():
+    #     formatted_code = json.dumps(code, indent=4)
+    #     logger.info(f"Generated code for {key}:\n{formatted_code}\n")
+
     output_path = "output/test_scripts.json"
     with open(output_path, "w") as json_file:
         json.dump(code_dict, json_file, indent=4)
@@ -44,7 +48,8 @@ def run_testing(debug, code_dict: Optional[Dict[str, str]] = None):
     if debug:
         code_dict = template.generate_scripts_for_debug()
 
-    print(code_dict)
+    for name, script in code_dict.items():
+        print(f"\nScript: {name}\n{'='*40}\n{script[:]}") #
 
     start_time = time.monotonic()
     results = testing.run_multiple_tests(code_dict)
@@ -70,7 +75,7 @@ def run_testing(debug, code_dict: Optional[Dict[str, str]] = None):
     help="Whether to include randomised scoping questionnaire responses (default is False).",
 )
 @click.option(
-    "--debug", is_flag=True, default=True, help="Debug mode (default is True)."
+    "--debug", is_flag=True, default=False, help="Debug mode (default is False)."
 )
 def main(model, task, randomise, debug):
     if debug:

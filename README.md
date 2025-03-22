@@ -35,7 +35,8 @@ A simple CLI tool to evaluate AI-driven penetration testing
    `venv\Scripts\activate`
 3. Install
    `pip install -r requirements.txt`
-
+4. .env
+   `Set up .env file`
 ## Usage (WIP)
 
 ```
