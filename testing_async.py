@@ -53,6 +53,7 @@ async def run_tests_async(code):
                 "python",
                 "-u",
                 tmp_file_path,
+                limit=2**20,  # 1 MiB
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
@@ -104,8 +105,9 @@ async def run_multiple_tests_async(code_dict):
 
 
 def run_multiple_tests(code):
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    results = loop.run_until_complete(run_multiple_tests_async(code))
-    loop.close()
+    # loop = asyncio.new_event_loop()
+    # asyncio.set_event_loop(loop)
+    # results = loop.run_until_complete(run_multiple_tests_async(code))
+    # loop.close()
+    results = asyncio.run(run_multiple_tests_async(code))
     return results
