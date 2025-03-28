@@ -25,13 +25,14 @@ def show_completion(results: Dict):
                 for json_data in json_data_list
                 if json_data.get("type") == "result"
             ]
-            prop_working = len(working) / len(json_data_list)
+
             total_working += len(working)
             total_available += len(json_data_list)
 
-            if total_available == 0:
+            if len(json_data_list) == 0:
                 output += f"Testing for {key} has 0 test cases generated.\n"
             else:
+                prop_working = len(working) / len(json_data_list)
                 output += f"Testing for {key} completed {len(working)}/{len(json_data_list)} ({round(prop_working * 100)}%) of test cases generated.\n"
         else:
             output += f"Testing for {key} failed.\n"
