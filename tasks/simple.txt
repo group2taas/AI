@@ -1,2 +1,2 @@
-instagram, "https://instagram.com"
-linkedin, "https://linkedin.com"
+firingrange, "https://public-firing-range.appspot.com/"
+ginandjuice, "https://ginandjuice.shop/"

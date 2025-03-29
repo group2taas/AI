@@ -46,13 +46,41 @@ class OWASP_SecurityTests(unittest.TestCase):
             self.driver.delete_all_cookies()
             self.zap = ZAPv2(apikey=ZAP_API_KEY, proxies={"http": self.zap_proxy, "https": self.zap_proxy})
             self.zap.core.delete_all_alerts()
+            self.visited_urls = set()
+            self.crawl_and_scan(self.target_url)
             self.alert_count_before = len(self.zap.core.alerts(baseurl=self.target_url))
+
         except Exception as e:
             print(json.dumps({
                 "type": "error", 
                 "message": f"Setup failed: {str(e)}"
             }))
             raise
+    
+    def crawl_and_scan(self, url):
+        if url in self.visited_urls:
+            return
+        self.visited_urls.add(url)
+
+        try:
+            self.driver.get(url)
+            time.sleep(1)
+            self.zap.urlopen(url)
+            time.sleep(1)
+            
+            link_elements = self.driver.find_elements(By.TAG_NAME, "a")
+            for i in range(len(link_elements)):
+                try:
+                    link_elements = self.driver.find_elements(By.TAG_NAME, "a")
+                    href = link_elements[i].get_attribute("href")
+                    if href and href.startswith(self.target_url) and href not in self.visited_urls:
+                        self.crawl_and_scan(href)
+                except Exception as e:
+                    continue
+
+        except Exception as e:
+            self.results[f"crawl_{url}"] = f"error: {str(e)}"
+
 
     def run_zap_scans(self):
         try:

@@ -13,8 +13,8 @@ ANALYSIS_PROMPT = PromptTemplate(
     input_variables=["template_script", "interview_answers"],
     template="""
 You are an expert in cybersecurity penetration testing.
-Based solely on the interview answers provided and the OWASP guidelines, write a complete penetration testing script in Python that implements multiple comprehensive test cases using Selenium and ZAP API.
-Your output must strictly follow the provided format. Replace <target_url> with the given application URL and add relevant test functions.
+Based solely on the interview answers provided and the OWASP guidelines, write a complete penetration testing script in Python that implements comprehensive and modular test cases using Selenium and the OWASP ZAP API.
+Your output must strictly follow the provided format. Replace <target_url> with the given application URL and add all relevant test functions.
 
 Ensure that each test function:
 - Uses `try-except` blocks for robust error handling.
@@ -29,6 +29,7 @@ To avoid timeout errors, invalid JSON responses, and ZAP execution failures, the
 4. Structured error messages in JSON for all skipped or failed tests.
 5. All test outcomes written to `self.results`, even for skipped tests.
 6. All variable and function names must be valid Python identifiers (e.g., use `snake_case`, no spaces, no invalid characters).
+7. The script must dynamically crawl and scan all accessible paths and endpoints of the website, using both ZAP spidering and Selenium navigation to simulate real user interactions.
 
 The output should contain no explanations, no comments, and no extra text.
 
