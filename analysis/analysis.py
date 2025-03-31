@@ -45,12 +45,15 @@ class AnalysisAgent:
         return results
 
     def analyze_multiple_interviews(self, interview_answers_dict):
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        results = loop.run_until_complete(
+        # loop = asyncio.new_event_loop()
+        # asyncio.set_event_loop(loop)
+        # results = loop.run_until_complete(
+        #     self.analyze_multiple_interviews_async(interview_answers_dict)
+        # )
+        # loop.close()
+        results = asyncio.run(
             self.analyze_multiple_interviews_async(interview_answers_dict)
         )
-        loop.close()
         return results
 
     def _parse_output(self, raw_output):

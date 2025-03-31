@@ -42,7 +42,7 @@ def show_completion(results: Dict):
         else:
             output += f"Testing for {key} failed.\n"
 
-    if len(completed) != 0:
+    if len(completed) != 0 and total_available != 0:
         output += f"Overall working test cases: {total_working}/{total_available} ({(total_working / total_available) * 100} %)\n"
 
     return output
