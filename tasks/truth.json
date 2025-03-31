@@ -1,0 +1,56 @@
+{
+  "firingrange,": {
+    "Address DOM XSS": "",
+    "Angular-based XSSes": "",
+    "Bad JavaScript imports": "",
+    "Clickjacking": "",
+    "CORS related vulnerabilities": "",
+    "DOM XSS": "",
+    "Escaped XSS": "",
+    "Flash Injection": "",
+    "Leaked httpOnly cookie": "",
+    "Mixed content": "",
+    "Redirect XSS": "",
+    "Reflected XSS": "",
+    "Remote inclusion XSS": "",
+    "Reverse ClickJacking": "",
+    "HSTS": "",
+    "Tag based XSS": "",
+    "URL-based DOM XSS": "",
+    "Vulnerable libraries": "",
+    "Insecure Third-Party Script Embedding": ""
+  },
+  "ginandjuice,": {
+    "https://ginandjuice.shop/": [
+      "Base64-encoded data in parameter",
+      "Request URL override"
+    ],
+    "https://ginandjuice.shop/blog": [
+      "Client-side prototype pollution",
+      "Client-side template injection",
+      "Cross-site scripting (DOM-based)",
+      "Open redirection (DOM-based)"
+    ],
+    "https://ginandjuice.shop/catalog": [
+      "Client-side template injection",
+      "Cross-site scripting (reflected)",
+      "DOM data manipulation (reflected DOM-based)",
+      "HTTP response header injection",
+      "Link manipulation (reflected DOM-based)",
+      "SQL injection"
+    ],
+    "https://ginandjuice.shop/catalog/product/stock": [
+      "XML external entity injection"
+    ],
+    "https://ginandjuice.shop/catalog/subscribe": [
+      "Cross-site scripting (reflected)"
+    ],
+    "https://ginandjuice.shop/login": [
+      "Cross-site scripting (reflected)",
+      "DOM data manipulation (reflected DOM-based)"
+    ],
+    "https://ginandjuice.shop/resources/js/deparam.js": [
+      "Vulnerable JavaScript dependency"
+    ]
+  }
+}

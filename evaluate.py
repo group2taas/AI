@@ -4,7 +4,7 @@ import json
 
 # import testing
 import testing_async as testing
-import summary
+from summary import summary
 from tasks import template
 from analysis.analysis import AnalysisAgent
 from enums import EnumEncoder
@@ -49,7 +49,7 @@ def run_testing(debug, code_dict: Optional[Dict[str, str]] = None):
         code_dict = template.generate_scripts_for_debug()
 
     for name, script in code_dict.items():
-        print(f"\nScript: {name}\n{'='*40}\n{script[:]}") #
+        print(f"\nScript: {name}\n{'='*40}\n{script[:]}")  #
 
     start_time = time.monotonic()
     results = testing.run_multiple_tests(code_dict)
@@ -86,7 +86,7 @@ def main(model, task, randomise, debug):
     code_dict = run_analysis(debug, model, task, randomise)
     results = run_testing(debug, code_dict=code_dict)
 
-    summary.show_completion(results)
+    summary.show_results(results=results)
 
 
 if __name__ == "__main__":
