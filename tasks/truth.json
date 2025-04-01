@@ -1,24 +1,62 @@
 {
   "firingrange,": {
-    "Address DOM XSS": "",
-    "Angular-based XSSes": "",
-    "Bad JavaScript imports": "",
-    "Clickjacking": "",
-    "CORS related vulnerabilities": "",
-    "DOM XSS": "",
-    "Escaped XSS": "",
-    "Flash Injection": "",
-    "Leaked httpOnly cookie": "",
-    "Mixed content": "",
-    "Redirect XSS": "",
-    "Reflected XSS": "",
-    "Remote inclusion XSS": "",
-    "Reverse ClickJacking": "",
-    "HSTS": "",
-    "Tag based XSS": "",
-    "URL-based DOM XSS": "",
-    "Vulnerable libraries": "",
-    "Insecure Third-Party Script Embedding": ""
+    "https://public-firing-range.appspot.com/address/index.html": [
+      "Address DOM XSS"
+    ],
+    "https://public-firing-range.appspot.com/angular/index.html": [
+      "Angular-based XSSes"
+    ],
+    "https://public-firing-range.appspot.com/badscriptimport/index.html": [
+      "Bad JavaScript imports"
+    ],
+    "https://public-firing-range.appspot.com/clickjacking/index.html": [
+      "Clickjacking"
+    ],
+    "https://public-firing-range.appspot.com/cors/index.html": [
+      "CORS related vulnerabilities"
+    ],
+    "https://public-firing-range.appspot.com/dom/index.html": [
+      "DOM XSS"
+    ],
+    "https://public-firing-range.appspot.com/escape/index.html": [
+      "Escaped XSS"
+    ],
+    "https://public-firing-range.appspot.com/flashinjection/index.html": [
+      "Flash Injection"
+    ],
+    "https://public-firing-range.appspot.com/leakedcookie/index.html": [
+      "Leaked httpOnly cookie"
+    ],
+    "https://public-firing-range.appspot.com/mixedcontent/index.html": [
+      "Mixed content"
+    ],
+    "https://public-firing-range.appspot.com/redirect/index.html": [
+      "Redirect XSS"
+    ],
+    "https://public-firing-range.appspot.com/reflected/index.html": [
+      "Reflected XSS"
+    ],
+    "https://public-firing-range.appspot.com/remoteinclude/index.html": [
+      "Remote inclusion XSS"
+    ],
+    "https://public-firing-range.appspot.com/reverseclickjacking/": [
+      "Reverse ClickJacking"
+    ],
+    "https://public-firing-range.appspot.com/stricttransportsecurity/index.html": [
+      "HSTS"
+    ],
+    "https://public-firing-range.appspot.com/tags/index.html": [
+      "Tag based XSS"
+    ],
+    "https://public-firing-range.appspot.com/urldom/index.html": [
+      "URL-based DOM XSS"
+    ],
+    "https://public-firing-range.appspot.com/vulnerablelibraries/index.html": [
+      "Vulnerable libraries"
+    ],
+    "https://public-firing-range.appspot.com/insecurethirdpartyscripts/index.html": [
+      "Insecure Third-Party Script Embedding"
+    ]
   },
   "ginandjuice,": {
     "https://ginandjuice.shop/": [
