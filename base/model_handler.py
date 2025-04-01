@@ -26,6 +26,10 @@ class AIModelHandler:
 
     def query_model(self, prompt):
         completion = self.client.chat.completions.create(
+             temperature=0.2, 
+            top_p=0.95,
+            frequency_penalty=0.1,
+            presence_penalty=0,
             extra_body={},
             model=self.model,
             messages=[{"role": "user", "content": prompt}],
@@ -35,6 +39,10 @@ class AIModelHandler:
 
     async def query_model_async(self, prompt):
         completion = await self.async_client.chat.completions.create(
+            temperature=0.2,
+            top_p=0.95,
+            frequency_penalty=0.1,
+            presence_penalty=0,
             extra_body={},
             model=self.model,
             messages=[{"role": "user", "content": prompt}],
