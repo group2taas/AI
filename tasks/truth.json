@@ -90,5 +90,25 @@
     "https://ginandjuice.shop/resources/js/deparam.js": [
       "Vulnerable JavaScript dependency"
     ]
-  }
+  },
+  "testphp,": {
+    "http://testphp.vulnweb.com/": [
+      "SQL Injection",
+      "Reflected Cross-Site Scripting (XSS)",
+      "Missing Security Headers",
+      "Server Information Disclosure",
+      "Sensitive Information in Comments",
+      "Review Webpage Content for Information Leakage",
+      "Fingerprint Web Server",
+      "Stored Cross-Site Scripting",
+      "HTTP Verb Tampering",
+      "HTTP Parameter Pollution",
+      "Session Management Schema",
+      "Cookies Attributes",
+      "Session Fixation",
+      "Test Network Infrastructure Configuration",
+      "Test Application Platform Configuration",
+      "Test File Extensions Handling for Sensitive Information"
+  ]
+}
 }

@@ -1,2 +1,1 @@
-firingrange, "https://public-firing-range.appspot.com/"
-ginandjuice, "https://ginandjuice.shop/"
+testphp, "http://testphp.vulnweb.com/"
