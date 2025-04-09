@@ -1,5 +1,6 @@
 from base.model_handler import AIModelHandler
 from base.owasp_model_handler import OWASPModelHandler
+from base.ensemble_model_handler import EnsembleModelHandler, ModelWeights
 from .prompts import ANALYSIS_PROMPT, ZAP_TEMPLATE_SCRIPT
 from loguru import logger
 import re
@@ -12,9 +13,23 @@ class AnalysisAgent:
             self.model_handler = AIModelHandler()
         elif model_handler == "rag":
             self.model_handler = OWASPModelHandler()
+        elif model_handler == "ensemble":
+            self.model_handler = EnsembleModelHandler(
+                models=["base", "rag"],
+                weights=ModelWeights(
+                    generation_weight=1.0,
+                    voting_weight=1.2,
+                    rag_weight=1.8,
+                    confidence_impact=0.3,
+                    diversity_bonus=0.4
+                ),
+                temperature_variants=[0.1, 0.4, 0.7],
+                confidence_threshold=0.45,
+                consensus_strategy="adaptive"
+            )
         else:
             raise ValueError(
-                f"Invalid model handler: {model_handler}. Use either 'base' or 'rag'."
+                f"Invalid model handler: {model_handler}. Use 'base', 'rag', or 'ensemble'."
             )
 
     def analyze_interview(self, interview_answers):
