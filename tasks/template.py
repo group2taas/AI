@@ -59,9 +59,9 @@ def generate_template_for_debug(task: str, randomise: bool = False) -> Dict[str,
 
 
 def generate_scripts_for_debug(num_scripts=4) -> Dict[str, str]:
-    import os
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
     with open(f"{base_dir}/debug_script.py", "r") as file:
         content = file.read()
+    
     return {f"example{i}": content for i in range(1, num_scripts + 1)}
