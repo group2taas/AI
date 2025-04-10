@@ -1,6 +1,7 @@
 import click
 import time
 import json
+import os
 
 # import testing
 import testing_async as testing
@@ -37,6 +38,8 @@ def run_analysis(debug, model, task, randomise):
     #     logger.info(f"Generated code for {key}:\n{formatted_code}\n")
 
     output_path = "output/test_scripts.json"
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    
     with open(output_path, "w") as json_file:
         json.dump(code_dict, json_file, indent=4)
     logger.info(f"Testing scripts are saved at: {output_path}")
@@ -58,6 +61,8 @@ def run_testing(debug, code_dict: Optional[Dict[str, str]] = None):
     logger.info(f"Took {end_time - start_time} seconds to run all tests")
 
     output_path = "output/test_results.json"
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
     with open(output_path, "w") as json_file:
         json.dump(results, json_file, indent=4, cls=EnumEncoder)
     logger.info(f"Testing results are saved at: {output_path}")
