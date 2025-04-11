@@ -1,1 +1,5 @@
-testphp, "http://testphp.vulnweb.com/"
+testphp1, "http://testphp.vulnweb.com/"
+testphp2, "http://testphp.vulnweb.com/"
+testphp3, "http://testphp.vulnweb.com/"
+testphp4, "http://testphp.vulnweb.com/"
+testphp5, "http://testphp.vulnweb.com/"

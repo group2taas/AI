@@ -15,9 +15,7 @@
     "https://public-firing-range.appspot.com/cors/index.html": [
       "CORS related vulnerabilities"
     ],
-    "https://public-firing-range.appspot.com/dom/index.html": [
-      "DOM XSS"
-    ],
+    "https://public-firing-range.appspot.com/dom/index.html": ["DOM XSS"],
     "https://public-firing-range.appspot.com/escape/index.html": [
       "Escaped XSS"
     ],
@@ -91,7 +89,7 @@
       "Vulnerable JavaScript dependency"
     ]
   },
-  "testphp,": {
+  "testphp1,": {
     "http://testphp.vulnweb.com/": [
       "SQL Injection",
       "Reflected Cross-Site Scripting (XSS)",
@@ -109,6 +107,86 @@
       "Test Network Infrastructure Configuration",
       "Test Application Platform Configuration",
       "Test File Extensions Handling for Sensitive Information"
-  ]
-}
+    ]
+  },
+  "testphp2,": {
+    "http://testphp.vulnweb.com/": [
+      "SQL Injection",
+      "Reflected Cross-Site Scripting (XSS)",
+      "Missing Security Headers",
+      "Server Information Disclosure",
+      "Sensitive Information in Comments",
+      "Review Webpage Content for Information Leakage",
+      "Fingerprint Web Server",
+      "Stored Cross-Site Scripting",
+      "HTTP Verb Tampering",
+      "HTTP Parameter Pollution",
+      "Session Management Schema",
+      "Cookies Attributes",
+      "Session Fixation",
+      "Test Network Infrastructure Configuration",
+      "Test Application Platform Configuration",
+      "Test File Extensions Handling for Sensitive Information"
+    ]
+  },
+  "testphp3,": {
+    "http://testphp.vulnweb.com/": [
+      "SQL Injection",
+      "Reflected Cross-Site Scripting (XSS)",
+      "Missing Security Headers",
+      "Server Information Disclosure",
+      "Sensitive Information in Comments",
+      "Review Webpage Content for Information Leakage",
+      "Fingerprint Web Server",
+      "Stored Cross-Site Scripting",
+      "HTTP Verb Tampering",
+      "HTTP Parameter Pollution",
+      "Session Management Schema",
+      "Cookies Attributes",
+      "Session Fixation",
+      "Test Network Infrastructure Configuration",
+      "Test Application Platform Configuration",
+      "Test File Extensions Handling for Sensitive Information"
+    ]
+  },
+  "testphp4,": {
+    "http://testphp.vulnweb.com/": [
+      "SQL Injection",
+      "Reflected Cross-Site Scripting (XSS)",
+      "Missing Security Headers",
+      "Server Information Disclosure",
+      "Sensitive Information in Comments",
+      "Review Webpage Content for Information Leakage",
+      "Fingerprint Web Server",
+      "Stored Cross-Site Scripting",
+      "HTTP Verb Tampering",
+      "HTTP Parameter Pollution",
+      "Session Management Schema",
+      "Cookies Attributes",
+      "Session Fixation",
+      "Test Network Infrastructure Configuration",
+      "Test Application Platform Configuration",
+      "Test File Extensions Handling for Sensitive Information"
+    ]
+  },
+  "testphp5,": {
+    "http://testphp.vulnweb.com/": [
+      "SQL Injection",
+      "Reflected Cross-Site Scripting (XSS)",
+      "Missing Security Headers",
+      "Server Information Disclosure",
+      "Sensitive Information in Comments",
+      "Review Webpage Content for Information Leakage",
+      "Fingerprint Web Server",
+      "Stored Cross-Site Scripting",
+      "HTTP Verb Tampering",
+      "HTTP Parameter Pollution",
+      "Session Management Schema",
+      "Cookies Attributes",
+      "Session Fixation",
+      "Test Network Infrastructure Configuration",
+      "Test Application Platform Configuration",
+      "Test File Extensions Handling for Sensitive Information"
+    ]
+  }
 }
