@@ -29,6 +29,8 @@ BASE_URL = os.getenv("OPENROUTER_BASE_URL")
 API_KEY = os.getenv("OPENROUTER_API_TOKEN")
 MODEL = os.getenv("OPENROUTER_MODEL")
 
+OPENAI_API_KEY = os.getenv("OPENAI_API_TOKEN")
+
 
 def filter_json(result: List):
     output = dict()
@@ -36,13 +38,13 @@ def filter_json(result: List):
         if data.get("type", "") == "result":
             url = data.get("target_url", "")
             test = data.get("test_case", "")
-            result = data.get("result", "")
+            res = data.get("result", "")
             alerts = data.get("alert_details", [])
             if url not in output:
                 output[url] = []
             output[url].append(test)
-            if not result.lower().startswith("error"):
-                output[url].append(result)
+            if isinstance(res, str) and not res.lower().startswith("error"):
+                output[url].append(res)
 
             for alert in alerts:
                 alert_url = alert.get("url", "")
@@ -66,7 +68,8 @@ def run_eval_with_ai(results: Dict):
     document_chunks = RecursiveCharacterTextSplitter().split_documents(document)
     document_chunks = [doc.page_content for doc in document_chunks]
 
-    model = ChatOpenAI(model=MODEL, base_url=BASE_URL, api_key=API_KEY)
+    # model = ChatOpenAI(model=MODEL, base_url=BASE_URL, api_key=API_KEY)
+    model = ChatOpenAI(model="gpt-4o", api_key=OPENAI_API_KEY)
     evaluator_llm = LangchainLLMWrapper(model)
 
     # https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/
